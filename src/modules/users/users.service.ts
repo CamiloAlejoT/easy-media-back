@@ -17,19 +17,10 @@ export class UsersService {
 
     }
 
-    async create(email: string, password: string, name: string): Promise<User | undefined> {
-        const newUser: User = {
-            email: email,
-            name: name,
-            password: password,
-            uuid: uuidv4()
-        }
-        try {
-            const newUSer = await this.entitiesService.createUser(newUser)
-            return newUSer
-        } catch {
-            throw new Error("Unespected error");
-        }
+    async create(email: string, password: string, name: string): Promise<User> {
+        const newUser: User = { email, name, password, uuid: uuidv4() }
+        const newUSer = await this.entitiesService.createUser(newUser)
+        return newUSer
     }
 
 

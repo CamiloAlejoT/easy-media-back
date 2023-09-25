@@ -6,13 +6,12 @@ import {
     HttpStatus,
     Post,
     Request,
-    UseGuards
+    ValidationPipe 
 } from '@nestjs/common';
-import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { Public } from './constants'
 import { EntitiesService } from 'src/entities/entities.service'
-import { User } from 'src/core/interfaces/user.interface'
+import { LoginDto, SignInDto } from 'src/core/dtos/auth.dto'
 
 @Controller('auth')
 export class AuthController {
@@ -21,20 +20,17 @@ export class AuthController {
         private entitiesService: EntitiesService
     ) { }
 
-    @HttpCode(HttpStatus.OK)
     @Public()
     @Post('login')
-    login(@Body() signInDto: Record<string, any>) {
-        return this.authService.login(signInDto.username, signInDto.password);
+    login(@Body(ValidationPipe) { email, password}: LoginDto) {
+        return this.authService.login(email, password);
     }
 
     @Public()
     @Post('signin')
-    signin(@Body() {email, password, name}: Record<string, any>) {
+    signin(@Body(ValidationPipe) { email, password, name }: SignInDto) {
         return this.authService.signIn(email, password, name);
     }
-
-
 
     @Get('profile')
     async getProfile(@Request() req) {
