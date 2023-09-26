@@ -26,3 +26,9 @@ export class LoginDto {
   @IsNotEmpty({ message: AUTH.PASSWORDEMPRY })
   password: string;
 }
+
+export class logOutDto {
+  @IsString({ message: AUTH.UUIDNOTSTRING })
+  @IsNotEmpty({ message: AUTH.UUIDEMPTY })
+  uuid: string;
+}

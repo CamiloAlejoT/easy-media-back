@@ -18,9 +18,15 @@ export class AuthService {
             throw new UnauthorizedException();
         }
         const payload = { sub: user.uuid, username: user.email };
+        this.usersService.toggleUserStatus(user.uuid, user.isActive)
         return {
             access_token: await this.jwtService.signAsync(payload),
         };
+    }
+
+    async logOut(uuid: string): Promise<any> {
+        await this.usersService.toggleUserStatus(uuid, true)
+        return HttpStatus.OK
     }
 
     async signIn(email: string, password: string, name: string): Promise<any> {

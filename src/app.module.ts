@@ -5,12 +5,15 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { EntitiesModule } from './entities/entities.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PublicationsModule } from './modules/publications/publications.module';
+
 
 @Module({
   imports: [
     AuthModule,
     UsersModule,
     EntitiesModule,
+    PublicationsModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'db',
@@ -19,6 +22,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     })
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule { }

@@ -14,4 +14,7 @@ export class UserEntity implements User {
 
     @Column()
     password: string;
+
+    @Column()
+    isActive: boolean 
 }

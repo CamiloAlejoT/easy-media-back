@@ -3,10 +3,10 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UsersModule } from '../users/users.module';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
+import { jwtConstants } from '../../core/constants/constants';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard'
-import {EntitiesModule} from 'src/entities/entities.module'
+import { EntitiesModule } from 'src/entities/entities.module'
 
 @Module({
   imports: [

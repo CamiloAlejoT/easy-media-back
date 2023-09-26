@@ -2,16 +2,14 @@ import {
     Body,
     Controller,
     Get,
-    HttpCode,
-    HttpStatus,
     Post,
     Request,
-    ValidationPipe 
+    ValidationPipe
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Public } from './constants'
+import { Public } from '../../core/constants/constants'
 import { EntitiesService } from 'src/entities/entities.service'
-import { LoginDto, SignInDto } from 'src/core/dtos/auth.dto'
+import { LoginDto, SignInDto, logOutDto } from 'src/core/dtos/auth.dto'
 
 @Controller('auth')
 export class AuthController {
@@ -22,8 +20,13 @@ export class AuthController {
 
     @Public()
     @Post('login')
-    login(@Body(ValidationPipe) { email, password}: LoginDto) {
+    login(@Body(ValidationPipe) { email, password }: LoginDto) {
         return this.authService.login(email, password);
+    }
+
+    @Post('logout')
+    logOut(@Body(ValidationPipe) {uuid}: logOutDto ) {
+        return this.authService.logOut(uuid)
     }
 
     @Public()
@@ -32,11 +35,11 @@ export class AuthController {
         return this.authService.signIn(email, password, name);
     }
 
+    @Public()
     @Get('profile')
     async getProfile(@Request() req) {
         const readUser = await this.entitiesService.findAll()
         return {
-            user: req.user,
             createdUr: readUser
         };
     }
