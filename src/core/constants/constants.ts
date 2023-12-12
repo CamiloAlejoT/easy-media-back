@@ -13,9 +13,6 @@ export const maxMessageLength = 300
 export const MILISECONSDINDAY = 86400000
 
 
-
-
-
 //SQL CONST
 export const RETURNLIMIT = 2
 //tables

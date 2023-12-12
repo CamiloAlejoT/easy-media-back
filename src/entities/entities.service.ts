@@ -34,7 +34,6 @@ export class EntitiesService {
 
     // publications
     async getWithOffset(query: string) {
-        //return await this.publicationRepository.query('SELECT name FROM sqlite_master WHERE type = \'table\'')
         return await this.publicationRepository.query(query)
     }
 

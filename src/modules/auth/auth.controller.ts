@@ -9,7 +9,7 @@ import {
 import { AuthService } from './auth.service';
 import { Public } from '../../core/constants/constants'
 import { EntitiesService } from 'src/entities/entities.service'
-import { LoginDto, SignInDto, logOutDto } from 'src/core/dtos/auth.dto'
+import { LoginDto, SignInDto, logOutDto, renewDto } from 'src/core/dtos/auth.dto'
 
 @Controller('auth')
 export class AuthController {
@@ -27,6 +27,12 @@ export class AuthController {
     @Post('logout')
     logOut(@Body(ValidationPipe) {uuid}: logOutDto ) {
         return this.authService.logOut(uuid)
+    }
+    
+    @Public()
+    @Post('renew')
+    renew(@Body(ValidationPipe) {email}: renewDto ) {
+        return this.authService.renew(email)
     }
 
     @Public()

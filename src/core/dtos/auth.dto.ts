@@ -32,3 +32,9 @@ export class logOutDto {
   @IsNotEmpty({ message: AUTH.UUIDEMPTY })
   uuid: string;
 }
+
+export class renewDto {
+  @IsEmail({}, { message: AUTH.EMAILINVALID })
+  @IsNotEmpty({ message: AUTH.EMAILEMPTY })
+  email: string
+}
