@@ -30,8 +30,7 @@ export class AuthService {
         }
         this.usersService.toggleUserStatus(user.uuid, user.isActive)
         return {
-            uuid: user.uuid,
-            name: user.name,
+            role: user.name,
             email: user.email,
             access_token: await this.jwtService.signAsync(payload),
         };
